@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shopping_graph.xml"
+    app:startDestination="@id/homeFragment2">
+
+    <fragment
+        android:id="@+id/cartFragment2"
+        android:name="com.example.vashopify.fragments.shopping.CartFragment"
+        android:label="CartFragment"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment2_to_billingFragment"
+            app:destination="@id/billingFragment" />
+        <action
+            android:id="@+id/action_cartFragment2_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+        <action
+            android:id="@+id/action_cartFragment2_to_notificationFragment2"
+            app:destination="@id/notificationFragment2" />
+        <action
+            android:id="@+id/action_cartFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.example.vashopify.fragments.shopping.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment2_to_notificationFragment2"
+            app:destination="@id/notificationFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.example.vashopify.fragments.shopping.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment2_to_cartFragment2"
+            app:destination="@id/cartFragment2" />
+        <action
+            android:id="@+id/action_profileFragment2_to_addressActivity"
+            app:destination="@id/addressActivity" />
+        <action
+            android:id="@+id/action_profileFragment2_to_userAccountFragment"
+            app:destination="@id/userAccountFragment" />
+        <action
+            android:id="@+id/action_profileFragment2_to_allOrdersFragment"
+            app:destination="@id/allOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment2"
+        android:name="com.example.vashopify.fragments.shopping.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification">
+        <action
+            android:id="@+id/action_notificationFragment2_to_cartFragment2"
+            app:destination="@id/cartFragment2" />
+        <action
+            android:id="@+id/action_notificationFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/billingFragment"
+        android:name="com.example.vashopify.fragments.shopping.BillingFragment"
+        android:label="BillingFragment"
+        app:popUpTo="@+id/cartFragment2"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/fragment_billing">
+        <action
+            android:id="@+id/action_billingFragment_to_addressActivity"
+            app:destination="@id/addressActivity" />
+        <action
+            android:id="@+id/action_billingFragment_to_cartFragment2"
+            app:destination="@id/cartFragment2"
+            app:popUpTo="@id/billingFragment"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="cartItems"
+            app:argType="com.example.vashopify.data.CartResponse" />
+    </fragment>
+    <activity
+        android:id="@+id/addressActivity"
+        android:name="com.example.vashopify.activities.AddressActivity"
+        android:label="AddressActivity"
+        tools:layout="@layout/activity_address"/>
+    <fragment
+        android:id="@+id/userAccountFragment"
+        android:name="com.example.vashopify.fragments.settings.UserAccountFragment"
+        android:label="UserAccountFragment"
+        app:popUpTo="@+id/profileFragment2"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/fragment_user_account">
+        <action
+            android:id="@+id/action_userAccountFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2"
+            app:popUpTo="@id/userAccountFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"/>
+<!--        <action-->
+<!--            android:id="@+id/action_userAccountFragment_to_profileImageActivity"-->
+<!--            app:destination="@id/profileImageActivity"-->
+<!--            app:popUpTo="@id/userAccountFragment"-->
+<!--            app:popUpToInclusive="true"-->
+<!--            app:enterAnim="@android:anim/fade_in"-->
+<!--            app:exitAnim="@android:anim/fade_out" />-->
+<!--        <argument android:name="image"-->
+<!--            app:argType="string" />-->
+    </fragment>
+    <fragment
+        android:id="@+id/allOrdersFragment"
+        android:name="com.example.vashopify.fragments.settings.AllOrdersFragment"
+        android:label="AllOrdersFragment"
+
+        tools:layout="@layout/fragment_orders">
+        <action
+            android:id="@+id/action_allOrdersFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment"
+
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_allOrdersFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2"
+            app:popUpTo="@id/allOrdersFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"/>
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.example.vashopify.fragments.settings.OrderDetailFragment"
+        android:label="OrderDetailFragment"
+        tools:layout="@layout/fragment_order_detail">
+        <argument
+            android:name="orderDetails"
+            app:argType="com.example.vashopify.fragments.settings.data.OrderDataResponseItem" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_allOrdersFragment"
+            app:destination="@id/allOrdersFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+<!--    <activity-->
+<!--        android:id="@+id/profileImageActivity"-->
+<!--        android:name="com.example.vashopify.fragments.settings.ProfileImageActivity"-->
+<!--        android:label="ProfileImageActivity"-->
+<!--        tools:layout="@layout/activity_profile_image">-->
+<!--        <argument android:name="image"-->
+<!--            app:argType="string" />-->
+<!--    </activity>-->
+
+</navigation>

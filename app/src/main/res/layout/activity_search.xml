@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <!--        <androidx.core.widget.NestedScrollView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            app:layout_behavior="@string/searchbar_scrolling_view_behavior">-->
+
+    <!--        </androidx.core.widget.NestedScrollView>-->
+
+
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/g_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_searchBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/g_blue"
+                android:contentDescription="TODO"
+                android:foregroundGravity="center_vertical"
+                android:src="@drawable/baseline_arrow_back"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <com.mancj.materialsearchbar.MaterialSearchBar
+                android:id="@+id/searchBar"
+                style="@style/MaterialSearchBarLight"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/sf_pro_display"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:mt_hint="Search products..."
+                app:mt_maxSuggestionsCount="10"
+                app:mt_placeholder="Search Products..."
+                app:mt_searchBarColor="@color/white"
+                app:mt_searchIconDrawable="@drawable/ic_search"
+                app:mt_speechMode="false" />
+        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/searchProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:indeterminateTint="@color/g_blue"
+            android:visibility="gone"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollSearch"
+        android:layout_width="match_parent"
+        android:layout_height="736sp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBar">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+        >
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+
+                />
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.core.widget.NestedScrollView>
+    <!--    <com.google.android.material.search.SearchView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="737dp"-->
+    <!--        android:layout_marginTop="70dp"-->
+    <!--        android:hint=""-->
+    <!--        app:layout_anchor="@id/search_bar">-->
+
+    <!--    </com.google.android.material.search.SearchView>-->
+    <ProgressBar
+        android:id="@+id/bottomSearchProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:indeterminateTint="@color/g_blue"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+         />
+    <FrameLayout
+        android:id="@+id/flSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

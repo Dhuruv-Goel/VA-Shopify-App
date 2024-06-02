@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/network"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/nestedScrollMainCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_check_network_connection_n_try_again"
+                android:textColor="@color/g_gray700"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollMainCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:visibility="visible">
+
+
+                <ProgressBar
+                    android:id="@+id/mainCategoryProgressbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:indeterminateTint="@color/g_gray700"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvCat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:padding="10dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+                            <include layout="@layout/shimmer_item_category"
+                                android:layout_marginEnd="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+                            <include layout="@layout/shimmer_item_category"
+                                android:layout_marginEnd="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+                            <include layout="@layout/shimmer_item_category"
+                                android:layout_marginEnd="10dp"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+                            <include layout="@layout/shimmer_item_category"
+                                android:layout_marginEnd="10dp"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+                            <include layout="@layout/shimmer_item_category"
+                                android:layout_marginEnd="10dp"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+                        </LinearLayout>
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:visibility="visible"
+                        android:orientation="horizontal"
+                        tools:listitem="@layout/item_categories"
+                        tools:itemCount="1"/>
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/llbeautyproduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.666"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cvCat">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tvBeautyProducts"
+                            android:layout_width="200dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/poppins_thin"
+                            android:gravity="center_vertical"
+                            android:paddingStart="10dp"
+                            android:text="@string/beauty_products"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.055"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/buttonSeeAllBeauty"
+                            android:layout_width="75dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="95dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="@drawable/bg_btnseeall"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:text="@string/see_all"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="normal"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </LinearLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmer_rvbeauty"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="8dp">
+                                <include layout="@layout/shimmer_product_rv_item_card"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+                                <include layout="@layout/shimmer_product_rv_item_card"
+                                     android:layout_marginStart="10dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+                                <include layout="@layout/shimmer_product_rv_item_card"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+                            </LinearLayout>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvBeautyProduct"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="2dp"
+                            tools:itemCount="1"
+                            tools:listitem="@layout/product_rv_item" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llPersonalProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:padding="2dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.666"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llbeautyproduct">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvPersonalProducts"
+                        android:layout_width="200dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/poppins_thin"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:text="@string/personal_care_products"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.055"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttonSeeAllPersonal"
+                        android:layout_width="75sp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="95dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@drawable/bg_btnseeall"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="See All"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmer_rvPersonal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="8dp">
+                                <include layout="@layout/shimmer_product_rv_item_card"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+                                <include layout="@layout/shimmer_product_rv_item_card"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+                                <include layout="@layout/shimmer_product_rv_item_card"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+                            </LinearLayout>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvPersonalProduct"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:visibility="visible"
+                            android:padding="2dp"
+                            tools:itemCount="1"
+                            tools:listitem="@layout/product_rv_item"/>
+                    </FrameLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llWinterProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.666"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llPersonalProduct">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvWinterProducts"
+                        android:layout_width="200dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/poppins_thin"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:text="Winter Wears"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.055"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttonSeeAllWinter"
+                        android:layout_width="75dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="95dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@drawable/bg_btnseeall"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/see_all1"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmer_rvWinterWears"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="visible"
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="8dp">
+                                <include layout="@layout/shimmer_product_rv_item_card"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+                                <include layout="@layout/shimmer_product_rv_item_card"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+                                <include layout="@layout/shimmer_product_rv_item_card"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+                            </LinearLayout>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvWinterWears"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp"
+                            android:visibility="visible"
+                            tools:itemCount="1"
+                            tools:listitem="@layout/product_rv_item"/>
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
