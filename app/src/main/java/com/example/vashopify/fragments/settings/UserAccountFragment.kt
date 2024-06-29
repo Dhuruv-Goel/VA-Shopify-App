@@ -1,14 +1,12 @@
 package com.example.vashopify.fragments.settings
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -34,11 +32,6 @@ import com.example.vashopify.fragments.settings.viewmodel.UserAccountViewModel
 import com.example.vashopify.shop.ProductEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import java.io.File
-import java.io.FileOutputStream
 
 @AndroidEntryPoint
 class UserAccountFragment : Fragment(R.layout.fragment_user_account) {
@@ -60,9 +53,7 @@ class UserAccountFragment : Fragment(R.layout.fragment_user_account) {
         binding = FragmentUserAccountBinding.inflate(inflater)
         val startEditActivityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                // Handle the result here
-                val data = result.data
-                // Perform necessary actions, e.g., update the profile image
+//                val data = result.data
             }
         }
         imageActivityResultLauncher =
@@ -91,9 +82,7 @@ class UserAccountFragment : Fragment(R.layout.fragment_user_account) {
         prefs = requireActivity().getSharedPreferences("prefs",MODE_PRIVATE)
         val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                // Handle the result here
-                val data = result.data
-                // Perform necessary actions, e.g., update the profile image
+//                val data = result.data
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
@@ -133,7 +122,7 @@ class UserAccountFragment : Fragment(R.layout.fragment_user_account) {
             findNavController().navigate(R.id.action_userAccountFragment_to_profileFragment2)
         }
         binding.imageEdit.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             imageActivityResultLauncher.launch(intent)
 
@@ -148,20 +137,7 @@ class UserAccountFragment : Fragment(R.layout.fragment_user_account) {
             startForResult.launch(intent)
         }
 
-//        binding.buttonSave.setOnClickListener {
-//
-//            binding.apply {
-//                val firstName = edFirstName.text.toString().trim()
-//                val lastName = edLastName.text.toString().trim()
-//                val email = edEmail.text.toString().trim()
-//
-//                    val user = User(firstName, lastName, email, selectedimageUrl)
-//                    viewmodel.updateUser(user)
-//                    viewmodel.getAccount()
-////                binding.buttonSave.startAnimation()
-//
-//            }
-//        }
+
         viewmodel.getAccount()
 //        viewmodel.getAccount()
     }

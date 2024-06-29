@@ -53,11 +53,8 @@ class BaseCategoryFragment : Fragment(R.layout.fragment_base_category),SwipeRefr
         observeProducts()
         val arguments = arguments
         if (arguments != null) {
-            // Retrieve the value using the key specified during bundle creation
             val categoryName = arguments.getString("categoryName", "")
 
-            // Now, you can use the categoryName in your fragment as needed
-            // For example, set it to a TextView
             binding.tvToolbar.text = categoryName
             viewModel.fetchProducts(categoryName)
             binding.nestedScrollBaseCategory.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener{v,_,scrollY,_,_->
@@ -81,21 +78,16 @@ class BaseCategoryFragment : Fragment(R.layout.fragment_base_category),SwipeRefr
         binding.swipeRefresh.setOnRefreshListener(this)
     }
     override fun onRefresh() {
-        // Handle the refresh action here, e.g., fetch new data
 
         observeProducts()
         val arguments = arguments
         if (arguments != null) {
-            // Retrieve the value using the key specified during bundle creation
             val categoryName = arguments.getString("categoryName", "")
 
-            // Now, you can use the categoryName in your fragment as needed
-            // For example, set it to a TextView
             binding.tvToolbar.text = categoryName
             viewModel.fetchProducts(categoryName)
         }
 
-        // Complete the refresh animation after data is loaded
         binding.swipeRefresh.isRefreshing = false
     }
 
@@ -152,24 +144,15 @@ class BaseCategoryFragment : Fragment(R.layout.fragment_base_category),SwipeRefr
 
     override fun onDestroy() {
         super.onDestroy()
-        showToast("destroy")
         (activity as? ShoppingActivity)?.forCounterChanged()
     }
-
-//    override fun onPause() {
-//        super.onPause()
-//        (activity as? ShoppingActivity)?.onFragmentPaused()
-//    }
 
 }
 
 //            val actionBar: ActionBar? = (activity as? AppCompatActivity)?.supportActionBar
 //
-//            // Now you can modify the ActionBar as needed
 //            actionBar?.apply {
-//                // Set title
 //                title = categoryName
 //
-//                // Enable or disable home button
 //                setDisplayHomeAsUpEnabled(true).toString()
 //            }

@@ -1,11 +1,9 @@
 package com.example.vashopify.fragments.categories
 
 import CategoryEvent
-import android.annotation.SuppressLint
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,8 +20,6 @@ import com.example.vashopify.activities.ShoppingActivity
 import com.example.vashopify.adapters.MainBeautyProductsAdapter
 import com.example.vashopify.adapters.MainPersonalProductsAdapter
 import com.example.vashopify.adapters.MainWinterWearProductsAdapter
-import com.example.vashopify.data.CategoryResponse
-import com.example.vashopify.data.ProductResponse
 import com.example.vashopify.databinding.FragmentMainCategoryBinding
 import com.example.vashopify.fragments.categories.ui.CategoryAdapter
 import com.example.vashopify.shop.ProductEvent
@@ -31,12 +27,9 @@ import com.example.vashopify.viewmodel.MainCategoryViewModel
 import com.facebook.shimmer.ShimmerFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.Timer
-import java.util.concurrent.TimeUnit
-import kotlin.concurrent.timerTask
 import kotlin.properties.Delegates
 
-private val TAG = "MainCategoryFragment"
+//private val TAG = "MainCategoryFragment"
 
 @AndroidEntryPoint
 class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
@@ -46,8 +39,8 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
     private lateinit var mainPersonalProductsAdapter: MainPersonalProductsAdapter
     private lateinit var mainWinterWearProductsAdapter: MainWinterWearProductsAdapter
     private lateinit var categoryAdapter: CategoryAdapter
-    private lateinit var productList: ArrayList<ProductResponse>
-    private lateinit var categoryList: ArrayList<CategoryResponse>
+//    private lateinit var productList: ArrayList<ProductResponse>
+//    private lateinit var categoryList: ArrayList<CategoryResponse>
     private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var shimmer_card: ShimmerFrameLayout
@@ -68,24 +61,14 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainCategoryBinding.inflate(inflater)
-//        viewModel = ViewModelProvider()[MainCategoryViewModel::class.java]
         return binding.root
     }
 
-    @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupSeeAllButton()
         setupCategoryRv()
-//        categoryList =ArrayList()
-//        categoryList.add(CategoryResponse("",1,"Beauty"," ","beauty","","",0))
-//        categoryList.add(CategoryResponse("",2,"Care"," ","beauty","","",0))
-//        categoryList.add(CategoryResponse("",3,"Jewels"," ","beauty","","",0))
-//        categoryList.add(CategoryResponse("",4,"Cleaning"," ","beauty","","",0))
-//        categoryList.add(CategoryResponse("",5,"Home Remedies"," ","beauty","","",0))
-//        categoryList.add(CategoryResponse("",6,"Cosmetics"," ","beauty","","",0))
-//
-//        categoryAdapter.setData(categoryList)
+
         shimmer_card = requireActivity().findViewById(R.id.shimmer_card)
         shimmer_rvBeautyProduct = requireActivity().findViewById(R.id.shimmer_rvbeauty)
         shimmer_rvPersonal = requireActivity().findViewById(R.id.shimmer_rvPersonal)
@@ -102,21 +85,14 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
         network = sharedPreferences.getBoolean("network", false)
         if (network) {
             binding.main.visibility = View.VISIBLE
-
             binding.network.visibility = View.GONE
-//            Log.d("data",dataFetched.toString())
-//            if (viewModel.beautyState.value == null ||
-//                viewModel.catState.value == null ||
-//                viewModel.personalState.value == null ||
-//                viewModel.winterState.value == null) {
-//            }
-                viewModel.fetchBeautyProduct()
+
+            if (savedInstanceState == null) {
                 viewModel.fetchCategory()
+                viewModel.fetchBeautyProduct()
                 viewModel.fetchPersonalCareProduct()
                 viewModel.fetchWinterWearProduct()
-//                Timer().schedule(timerTask {
-//                    dataFetched = false
-//                }, TimeUnit.MINUTES.toMillis(5))
+            }
         } else {
             binding.network.visibility = View.VISIBLE
             binding.main.visibility = View.GONE
@@ -135,31 +111,11 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
     override fun onRefresh() {
         (activity as? ShoppingActivity)?.forInternetChanged()
         binding.swipeRefresh.isRefreshing = false
-
-//        network = sharedPreferences.getBoolean("network", false)
-//        Log.d("network", network.toString())
-//        if (network) { // Handle the refresh action here, e.g., fetch new data
-//            binding.network.visibility = View.GONE
-//            binding.main.visibility = View.VISIBLE
-//
         viewModel.fetchCategory()
         viewModel.fetchBeautyProduct()
         viewModel.fetchPersonalCareProduct()
         viewModel.fetchWinterWearProduct()
-
-//
-//            // Complete the refresh animation after data is loaded
         binding.swipeRefresh.isRefreshing = false
-//        } else {
-//            hideLoadingCategories()
-//            hideLoadingBeauty()
-//            hideLoadingWinter()
-//            hideLoadingPersonal()
-//            binding.main.visibility = View.GONE
-//            binding.network.visibility = View.VISIBLE
-//            binding.swipeRefresh.isRefreshing = false
-//
-//        }
 
     }
 
@@ -169,7 +125,6 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
             fragmentManager = requireActivity().supportFragmentManager
         )
         binding.rvCategory.apply {
-//         layoutManager = GridLayoutManager(requireContext(),4)
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = categoryAdapter
@@ -216,16 +171,16 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
     private fun observeCategories() {
 
        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.catState.observe(viewLifecycleOwner) { value ->
                     when (value) {
                         is CategoryEvent.Success -> {
                             hideLoadingCategories()
-                            val prodList = value.list
+                            val catList = value.list
 //                            binding.main.visibility =View.VISIBLE
 
 //                            showToast(prodList.toString())
-                            categoryAdapter.setData(prodList)
+                            categoryAdapter.setData(catList)
                         }
 
                         is CategoryEvent.Failure -> {
@@ -259,7 +214,7 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
     private fun observeBeautyProduct() {
 
       lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.beautyState.observe(viewLifecycleOwner) { value ->
                     when (value) {
                         is ProductEvent.Success -> {
@@ -305,7 +260,7 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
     private fun observePersonalProduct() {
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.personalState.observe(viewLifecycleOwner) { value ->
                     when (value) {
                         is ProductEvent.Success -> {
@@ -351,7 +306,7 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
     private fun observeWinterProduct() {
 
        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.winterState.observe(viewLifecycleOwner) { value ->
                     when (value) {
                         is ProductEvent.Success -> {
@@ -395,19 +350,6 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
 
     }
 
-    private fun hideLoading() {
-
-
-//
-
-
-    }
-
-    private fun showLoading() {
-
-
-    }
-
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
@@ -425,69 +367,19 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category),
     }
 
     private fun moveToAnotherFragment(fragment: Fragment, categoryName: String) {
-        // Get the FragmentManager
         val fragmentManager = requireActivity().supportFragmentManager
         val bundle = Bundle()
         bundle.putString("categoryName", categoryName)
         fragment.arguments = bundle
-        // Begin the FragmentTransaction
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-        // Replace the current fragment with the desired fragment
         fragmentTransaction.replace(R.id.flShopping, fragment)
 
-        // Optional: Add the transaction to the back stack
         fragmentTransaction.addToBackStack(null)
 
-        // Commit the transaction
         fragmentTransaction.commit()
     }
 
-    override fun onStart() {
-        super.onStart()
-        (activity as? ShoppingActivity)?.forInternetChanged()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        (activity as? ShoppingActivity)?.forInternetChanged()
-    }
-
-//    private fun isInternetAvailable(): Boolean {
-//        val connectivityManager =
-//            getSystemService(requireContext(),ConnectivityManager::class.java) as ConnectivityManager
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            val network = connectivityManager.activeNetwork
-//            val capabilities =
-//                connectivityManager.getNetworkCapabilities(network)
-//            return capabilities != null &&
-//                    (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-//                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
-//        } else {
-//            val networkInfo = connectivityManager.activeNetworkInfo
-//            return networkInfo != null && networkInfo.isConnected
-//        }
-//    }
 }
 
 
-//
-//
-//viewLifecycleOwner.lifecycleScope.launch {
-//    repeatOnLifecycle(Lifecycle.State.STARTED) {
-//        viewModel.showLoading.observe(viewLifecycleOwner) { showLoading ->
-//            if (showLoading) {
-//                binding.mainCategoryProgressbar.visibility = View.VISIBLE
-////                        binding.llbeautyproduct.visibility = View.GONE
-////                        binding.rvBeautyProduct.visibility = View.GONE
-//            } else {
-//                binding.mainCategoryProgressbar.visibility = View.GONE
-////                        binding.llbeautyproduct.visibility = View.VISIBLE
-////                        binding.rvBeautyProduct.visibility = View.VISIBLE
-//
-//            }
-//        }
-//
-//    }
-//}

@@ -71,7 +71,6 @@ class LoginViewModel @Inject constructor(
                 )
                 resultChannel.send(result)
             } catch (e: Exception) {
-                // Handle authentication failure
                 resultChannel.send(AuthResult.UnknownError())
             } finally {
                 _loginUiState.update { it.copy(isLoading = false) }

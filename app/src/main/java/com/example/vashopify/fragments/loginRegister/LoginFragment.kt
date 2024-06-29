@@ -49,11 +49,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.tvDontHaveAccount.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.loginUiState.collect{state->
-//                updateUi(state)
-//            }
-//        }
+
 
         binding.apply {
 
@@ -153,11 +149,5 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
-//    private fun updateUi(state: LoginUiState){
-//        binding.apply {
-//            edEmailLogin.setText(state.loginEmail)
-//            edPasswordLogin.setText(state.loginPassword)
-//
-//        }
-//    }
+
 }

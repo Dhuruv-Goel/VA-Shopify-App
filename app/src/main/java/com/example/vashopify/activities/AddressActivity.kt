@@ -1,7 +1,6 @@
 package com.example.vashopify.activities
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -31,13 +30,12 @@ class AddressActivity : AppCompatActivity() {
     private val viewModel: AddressViewModel by viewModels()
     private lateinit var isSaved: String
 
-    //    private lateinit var isSaved:Boolean
-//        private val savedInfo = SavedInfo()
+
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-//        Log.d("start", "Activity Created")
+
         collectAddress()
         observeLoading()
         observeDelete()
@@ -46,21 +44,10 @@ class AddressActivity : AppCompatActivity() {
         binding.btnAddressClose.setOnClickListener {
             finish()
         }
-//        binding.buttonSave.visibility = View.VISIBLE
-//        binding.buttonUpdate.visibility = View.GONE
-        // Initialize sharedPreferences
+
         sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE)
 
-//        binding.buttonSave.setOnClickListener {
-//            val edAddressTitle = binding.edAddressTitle.text.toString()
-//            val edShopName = binding.edShopName.text.toString()
-//            val edStreet = binding.edStreet.text.toString()
-//            val edPhone = binding.edPhone.text.toString()
-//            val edCity = binding.edCity.text.toString()
-//            val edState = binding.edState.text.toString()
-//
-//            viewModel.addNewAddress()
-//        }
+
         binding.apply {
             edAddressTitle.addTextChangedListener { text ->
                 viewModel.onEvent(AddressUIEvent.AddressTitleChanged(text.toString()))
@@ -96,9 +83,7 @@ class AddressActivity : AppCompatActivity() {
                 viewModel.onEvent(AddressUIEvent.Delete)
             }
         }
-//   if(savedInfo.isDeleted){
-//
-//   }
+
         isSaved = sharedPreferences.getString("isSaved", "false").toString()
         showToast(isSaved)
         if (isSaved == "true") {
@@ -275,8 +260,6 @@ class AddressActivity : AppCompatActivity() {
             .apply()
 
     }
-//    internal data class SavedInfo(
-//        var isSaved: Boolean = false
-//    )
+
 
 }

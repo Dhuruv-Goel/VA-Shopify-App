@@ -32,11 +32,9 @@ class MainPersonalProductsAdapter(private val context :Context,private val fragm
             }
             itemView.setOnClickListener {
                 val fragment = ProductDetailsFragment()
-                // Pass data to the fragment using arguments
                 val bundle = Bundle()
                 bundle.putString("id", productResponse._id.toString())
                 bundle.putString("isAdded", productResponse.isAdded.toString())
-//                bundle.putString("categoryName", productResponse.categoryName)
                 bundle.putString("brandName", productResponse.brandName)
                 bundle.putString("name", productResponse.name)
                 bundle.putString("description", productResponse.description)
@@ -47,13 +45,9 @@ class MainPersonalProductsAdapter(private val context :Context,private val fragm
 
                 fragment.arguments = bundle
 
-                // Begin the transaction
                 val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-                // Replace the existing fragment with the new one
                 transaction.replace(R.id.flShopping, fragment)
-                // Add the transaction to the back stack (optional)
                 transaction.addToBackStack(null)
-                // Commit the transaction
                 transaction.commit()
             }
         }

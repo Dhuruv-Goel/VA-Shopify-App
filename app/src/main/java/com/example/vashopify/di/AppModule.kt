@@ -1,20 +1,18 @@
 package com.example.vashopify.di
 
-//import retrofit2.GsonConverterFactory
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.example.vashopify.auth.AuthApi
 import com.example.vashopify.auth.AuthRepository
 import com.example.vashopify.auth.AuthRepositoryImpl
-import com.example.vashopify.auth.UploadApi
 import com.example.vashopify.auth.UserApi
 import com.example.vashopify.fragments.categories.api.CategoryApi
 import com.example.vashopify.fragments.categories.repository.CatRepo
 import com.example.vashopify.fragments.categories.repository.ImplCatRepo
+import com.example.vashopify.fragments.settings.api.OrderApi
 import com.example.vashopify.fragments.shopping.api.AddressApi
 import com.example.vashopify.fragments.shopping.api.CartApi
-import com.example.vashopify.fragments.settings.api.OrderApi
 import com.example.vashopify.fragments.shopping.repository.CartRepository
 import com.example.vashopify.fragments.shopping.repository.ImplCartRepository
 import com.example.vashopify.shop.AddressRepository
@@ -24,7 +22,6 @@ import com.example.vashopify.shop.ProductApi
 import com.example.vashopify.shop.ProductRepository
 import com.example.vashopify.util.AuthInterceptor
 import com.example.vashopify.util.TokenManager
-import com.example.vashopify.util.TokenManagerInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,7 +41,7 @@ object AppModule {
     @Singleton
     fun provideRetrofitBuilder(): Retrofit.Builder{
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.74:3001")
+            .baseUrl("http://192.168.1.91:3001")
             .addConverterFactory(MoshiConverterFactory.create())
 
     }

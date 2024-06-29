@@ -43,4 +43,5 @@
     <string name="add_to_cart">Add to cart</string>
     <string name="addresses">Addresses</string>
     <string name="please_check_network_connection_n_try_again">Please Check Network Connection!! \n Try Again!!</string>
+    <string name="categories">Categories</string>
 </resources>

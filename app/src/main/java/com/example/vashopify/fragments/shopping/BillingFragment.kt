@@ -134,37 +134,28 @@ class BillingFragment : Fragment(R.layout.fragment_billing) {
 //        viewModel.getAddress()        billingViewModel.getCart()
 
     }
-    // Function to copy specific data from CartItemResponse to CopiedData
     fun copySpecificData(cartItem: CartItemResponse): CartItem {
-        // Extract specific data from the CartItemResponse
         val productId = cartItem.productId._id
         val quantity = cartItem.quantity
 
-        // Create a CopiedData object with the extracted data
         return CartItem(productId, quantity)
     }
 
-    // Function to copy specific data from a list of CartItemResponse to another list of CopiedData
     fun copySpecificDataList(cartItemList: List<CartItemResponse>): List<CartItem> {
-        // Define a list to store the copied data
         val copiedList: MutableList<CartItem> = mutableListOf()
 
-        // Iterate over the list of CartItemResponse
         for (cartItem in cartItemList) {
-            // Copy specific data from each CartItemResponse
             val copiedData = copySpecificData(cartItem)
 
-            // Add the copied data to the list
             copiedList.add(copiedData)
         }
 
-        // Return the list containing the copied data
         return copiedList
     }
 
     private fun generateOrderID(): String {
         val timestamp = System.currentTimeMillis()
-        val random = Random().nextInt(10000) // Adjust the range based on your requirements
+        val random = Random().nextInt(10000)
 
         val sdf = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
         val formattedDate = sdf.format(Date(timestamp))
@@ -198,15 +189,9 @@ class BillingFragment : Fragment(R.layout.fragment_billing) {
     }
 
     private fun onBackButtonPressed() {
-        // Get the FragmentManager
-//        val fragmentManager = requireActivity().supportFragmentManager
-//
-//        // Remove the current fragment
-//        fragmentManager.beginTransaction().remove(this).commit()
   findNavController().navigate(R.id.action_billingFragment_to_cartFragment2)
         cartViewModel.getCart()
-        // Or use popBackStack if the fragment is added to the back stack
-        // fragmentManager.popBackStack()// Remove the fragment from the back stack
+
     }
 
     private fun setupCartRv() {
@@ -220,9 +205,7 @@ class BillingFragment : Fragment(R.layout.fragment_billing) {
             adapter = billingAdapter
             addItemDecoration(VertcalItemDecoration())
         }
-//        viewModel.cartItems.observe(viewLifecycleOwner) { cartItems ->
-//            cartAdapter.setData(cartItems)
-//        }
+
     }
 
 
@@ -232,10 +215,8 @@ class BillingFragment : Fragment(R.layout.fragment_billing) {
                 when (result) {
                     is ProductEvent.UnitSuccess -> {
                         binding.buttonPlaceOrder.revertAnimation()
-//                        onBackButtonPressed()
-//                        (activity as? ShoppingActivity)?.forCounterChanged()
+
                         findNavController().navigate(R.id.action_billingFragment_to_cartFragment2)
-//                        cartViewModel.getCart()
 
                         Snackbar.make(requireView(), "Your Order was placed", Snackbar.LENGTH_LONG)
                             .show()
@@ -345,7 +326,6 @@ class BillingFragment : Fragment(R.layout.fragment_billing) {
 
     private fun hideLoadingAddress() {
         binding.progressbarAddress.visibility = View.GONE
-//        binding.tvSelectAddress.visibility=View.GONE
     }
 
     private fun showLoadingAddress() {

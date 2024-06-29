@@ -27,7 +27,6 @@ class SearchActivity :AppCompatActivity(){
   }
     private lateinit var searchAdapter: SearchAdapter
     private  lateinit var query :String
-    //    private  lateinit var query : String
     private val viewModel: SearchViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +38,6 @@ class SearchActivity :AppCompatActivity(){
         }
         setupSearchRv()
         observeProducts()
-//         query: String
         binding.searchBar.setOnSearchActionListener(object : MaterialSearchBar.OnSearchActionListener {
             override fun onSearchStateChanged(enabled: Boolean) {
 
@@ -60,7 +58,6 @@ class SearchActivity :AppCompatActivity(){
 
         binding.nestedScrollSearch.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener{ v, _, scrollY, _, _->
             if(v.getChildAt(0).bottom <= v.height +scrollY){
-//                binding.bottomSearchProgressBar.visibility =View.VISIBLE
                 observeProducts()
                 viewModel.fetchProducts(query)
             }
@@ -86,7 +83,6 @@ class SearchActivity :AppCompatActivity(){
                         is ProductEvent.Success -> {
                             hideLoading()
                             val prodList = value.list
-//                            showToast(prodList.toString())
                             searchAdapter.setData(prodList)
                         }
 

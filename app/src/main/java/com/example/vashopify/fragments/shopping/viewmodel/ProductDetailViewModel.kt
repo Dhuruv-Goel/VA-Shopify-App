@@ -48,7 +48,6 @@ class ProductDetailViewModel @Inject constructor(
                 )
                 resultChannel.send(response)
             } catch (e: Exception) {
-                // Handle authentication failure
                 resultChannel.send(AuthResult.UnknownError())
             }
         }
@@ -62,7 +61,6 @@ class ProductDetailViewModel @Inject constructor(
                 Log.d("error",response.toString())
                 resultUpdate.send(response)
             } catch (e: Exception) {
-                // Handle authentication failure
                 resultUpdate.send(AuthResult.UnknownError())
             }
         }

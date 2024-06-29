@@ -48,13 +48,9 @@ class MainWinterWearProductsAdapter(private val context: Context, private val fr
 
                 fragment.arguments = bundle
 
-                // Begin the transaction
                 val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-                // Replace the existing fragment with the new one
                 transaction.replace(R.id.flShopping, fragment)
-                // Add the transaction to the back stack (optional)
                 transaction.addToBackStack(null)
-                // Commit the transaction
                 transaction.commit()
             }
         }

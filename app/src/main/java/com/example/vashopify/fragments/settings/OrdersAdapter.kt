@@ -80,36 +80,11 @@ class OrdersAdapter(private val context: Context, private val onItemClickListene
             }
              itemView.setOnClickListener {
                  itemView.setOnClickListener {
-                     // Call the lambda expression when an item is clicked
                      onItemClickListener.invoke(orderResponse)
                  }
 
              }
-//            itemView.setOnClickListener {
-//                val fragment = ProductDetailsFragment()
-//                // Pass data to the fragment using arguments
-//                val bundle = Bundle()
-////                bundle.putString("id", productResponse._id.toString())
-////                bundle.putString("brandName", productResponse.brandName)
-////                bundle.putString("name", productResponse.name)
-////                bundle.putString("description", productResponse.description)
-////                bundle.putString("images", productResponse.images)
-////                bundle.putString("quantity", productResponse.quantity)
-////                bundle.putInt("mrpPrice", productResponse.mrpPrice.toInt())
-////                bundle.putInt("ratePrice", productResponse.ratePrice.toInt())
-////                bundle.putString("isAdded", productResponse.isAdded.toString())
-//
-//                fragment.arguments = bundle
-//
-//                // Begin the transaction
-//                val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-//                // Replace the existing fragment with the new one
-//                transaction.replace(R.id.flSearch, fragment)
-//                // Add the transaction to the back stack (optional)
-//                transaction.addToBackStack(null)
-//                // Commit the transaction
-//                transaction.commit()
-//            }
+
         }
 
 
@@ -148,22 +123,9 @@ class OrdersAdapter(private val context: Context, private val onItemClickListene
 
 
     }
-    //    fun setData(newList: List<ProductResponse>) {
-////        val diffUtilCallback = ProductResponseDiffCallback(datalist, newList)
-////        val diffResult = androidx.recyclerview.widget.DiffUtil.calculateDiff(diffUtilCallback)
-//
-//        datalist = newList
-//        notifyItemRangeChanged(0, datalist.size)
-////        diffResult.dispatchUpdatesTo(this)
-//    }
+
     fun setData(newList: List<OrderDataResponseItem>) {
         differ.submitList(newList)
     }
-//  var onClick :((OrderDataResponseItem) -> Unit)? = null
 }
 
-//interface  onItemClickListener{
-//    fun onItemClick(itemData: OrderDataResponseItem){
-//
-//    }
-//}

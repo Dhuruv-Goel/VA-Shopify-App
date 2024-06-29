@@ -105,7 +105,6 @@ class BillingViewModel @Inject constructor(
                 }
             }catch (e: Exception) {
                 Log.e("error", e.message.toString() + " Get Address")
-                // Handle error (e.g., show an error message)
                 _getaddress.value = ProductEvent.Failure
 
             }

@@ -5,12 +5,12 @@
         android:icon="@drawable/ic_home"
         android:id="@+id/homeFragment2"/>
 
-    <item android:title="@string/notifications"
-        android:icon="@drawable/baseline_notifications_none_24"
-        android:id="@+id/notificationFragment2"/>
+    <item android:title="@string/categories"
+        android:icon="@drawable/baseline_list_alt_24"
+        android:id="@+id/categoriesFragment2"/>
 
     <item android:title="@string/cart"
-        android:icon="@drawable/ic_cart"
+        android:icon="@drawable/baseline_shopping_cart_24"
         android:id="@+id/cartFragment2"/>
 
     <item android:title="@string/profile"

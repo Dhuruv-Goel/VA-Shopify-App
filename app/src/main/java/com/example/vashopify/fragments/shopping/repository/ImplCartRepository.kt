@@ -194,17 +194,13 @@ class ImplCartRepository(private val cartApi: CartApi, private val orderApi: Ord
 
     override suspend fun placeOrder(request: OrderRequest): AuthResult<Unit> {
         return try {
-            // Retrieve JWT token from preferences
 //            val token = prefs.getString("jwt", null) ?: return AuthResult.Unauthorized()
 
-            // Call the API to place the order
             orderApi.placeOrder(request)
 
-            // Return successful result if the order placement is successful
             AuthResult.Authorized(Unit)
 
         } catch (e: HttpException) {
-            // Handle HTTP exceptions
             if (e.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
                 Log.e("error", "Unauthorized: ${e.message}", e)
                 AuthResult.Unauthorized()
@@ -213,7 +209,6 @@ class ImplCartRepository(private val cartApi: CartApi, private val orderApi: Ord
                 AuthResult.UnknownError()
             }
         } catch (e: Exception) {
-            // Handle other exceptions
             Log.e("error", "Unknown Error: ${e.message}", e)
             AuthResult.UnknownError()
         }

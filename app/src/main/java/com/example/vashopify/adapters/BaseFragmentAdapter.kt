@@ -11,17 +11,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vashopify.R
-import com.example.vashopify.data.CategoryResponse
 import com.example.vashopify.data.ProductResponse
-import com.example.vashopify.databinding.ProductRvItemBinding
 import com.example.vashopify.databinding.ProductRvItemLargeBinding
 import com.example.vashopify.fragments.shopping.ProductDetailsFragment
 
 class BaseFragmentAdapter(private val context: Context,private val fragmentManager: FragmentManager):
     RecyclerView.Adapter<BaseFragmentAdapter.BaseFragmentViewHolder>() {
 
-//    private var datalist: List<CategoryResponse> = emptyList()
-    //    @SuppressLint("NotifyDataSetChanged")
+
 
 
    inner class BaseFragmentViewHolder(private val binding: ProductRvItemLargeBinding) :
@@ -38,9 +35,8 @@ class BaseFragmentAdapter(private val context: Context,private val fragmentManag
             }
             itemView.setOnClickListener {
                 val fragment = ProductDetailsFragment()
-                // Pass data to the fragment using arguments
                 val bundle = Bundle()
-                bundle.putString("id", productResponse._id.toString())
+                bundle.putString("id", productResponse._id)
 //                bundle.putBoolean("isAdded", productResponse.isAdded)
                 bundle.putString("brandName", productResponse.brandName)
                 bundle.putString("name", productResponse.name)
@@ -52,13 +48,9 @@ class BaseFragmentAdapter(private val context: Context,private val fragmentManag
                 bundle.putString("isAdded",productResponse.isAdded.toString())
                 fragment.arguments = bundle
 
-                // Begin the transaction
                 val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-                // Replace the existing fragment with the new one
                 transaction.replace(R.id.flShopping, fragment)
-                // Add the transaction to the back stack (optional)
                 transaction.addToBackStack(null)
-                // Commit the transaction
                 transaction.commit()
             }
         }
@@ -77,7 +69,7 @@ class BaseFragmentAdapter(private val context: Context,private val fragmentManag
 
     }
 
-    val differ = AsyncListDiffer(this, diffCallback)
+   private val differ = AsyncListDiffer(this, diffCallback)
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -97,14 +89,6 @@ class BaseFragmentAdapter(private val context: Context,private val fragmentManag
         val product = differ.currentList[position]
         holder.bind(product)
     }
-    //    fun setData(newList: List<ProductResponse>) {
-////        val diffUtilCallback = ProductResponseDiffCallback(datalist, newList)
-////        val diffResult = androidx.recyclerview.widget.DiffUtil.calculateDiff(diffUtilCallback)
-//
-//        datalist = newList
-//        notifyItemRangeChanged(0, datalist.size)
-////        diffResult.dispatchUpdatesTo(this)
-//    }
     fun setData(newList: List<ProductResponse>) {
         differ.submitList(newList)
     }

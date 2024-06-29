@@ -30,7 +30,6 @@ import kotlinx.coroutines.withContext
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
-//    private val viewModel by viewModels<RegisterViewModel>()
     private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreateView(
@@ -50,15 +49,11 @@ class RegisterFragment : Fragment() {
         binding.tvDoYouHaveAccount.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.registerUiState.collect{state->
-//                updateUi(state)
-//            }
-//        }
+
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.registerUiState.collect {state->
+                viewModel.registerUiState.collect { state ->
                     if (state.isLoading) {
                         binding.buttonRegisterRegister.startAnimation()
                     }
@@ -143,31 +138,4 @@ class RegisterFragment : Fragment() {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
-//    private fun updateUi(state:RegisterUiState){
-//        binding.apply {
-//            edFirstNameRegister.setText(state.registerFirstName)
-//            edLastNameRegister.setText(state.registerLastName)
-//            edMobileRegister.setText(state.registerMobile)
-//            edEmailRegister.setText(state.registerEmail)
-//            edPasswordRegister.setText(state.registerPassword)
-//
-//        }
-//    }
 }
-
-
-//viewModel.register.collect { it->
-//    when (it) {
-//        is Resource.Loading -> {
-//            binding.buttonRegisterRegister.startAnimation()
-//        }
-//        is Resource.Success -> {
-//            binding.buttonRegisterRegister.revertAnimation()
-//        }
-//        is Resource.Error -> {
-//            Log.e(TAG,it.message.toString())
-//            binding.buttonRegisterRegister.revertAnimation()
-//        }
-//        else -> Unit
-//    }
-//}

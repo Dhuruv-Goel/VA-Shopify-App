@@ -56,7 +56,7 @@
             android:windowSoftInputMode="adjustPan">
 
         </activity>
-        <meta-data android:name="CLOUDINARY_URL" android:value="cloudinary://dtvwjn0dj"/>
+
     </application>
 
 </manifest>

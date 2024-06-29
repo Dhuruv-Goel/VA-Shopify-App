@@ -105,7 +105,6 @@ class AddressViewModel @Inject constructor(
 
             } catch (e: Exception) {
                 Log.e("save add error", e.message.toString() + " Create Address")
-                // Handle error (e.g., show an error message)
             } finally {
                 resultChannel.send(AuthResult.UnknownError())
             }
@@ -127,7 +126,6 @@ class AddressViewModel @Inject constructor(
                 resultChannelupdate.send(result)
             } catch (e: Exception) {
                 Log.e("error", e.message.toString() + " Update Address")
-                // Handle error (e.g., show an error message)
                 resultChannelupdate.send(AuthResult.UnknownError())
 
             }
@@ -170,7 +168,6 @@ class AddressViewModel @Inject constructor(
                 }
             }catch (e: Exception) {
                Log.e("error", e.message.toString() + " Get Address")
-               // Handle error (e.g., show an error message)
                _getaddress.value = ProductEvent.Failure
 
            }

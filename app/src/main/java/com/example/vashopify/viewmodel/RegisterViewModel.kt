@@ -79,7 +79,7 @@ class RegisterViewModel @Inject constructor(
                     )
                     resultChannel.send(result)
                 } catch (e: Exception) {
-                    // Handle error (e.g., show an error message)
+                    // Handle error
                 } finally {
                     _registerUiState.update { it.copy(isLoading = false) }
                 }

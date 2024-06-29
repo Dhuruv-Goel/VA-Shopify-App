@@ -36,7 +36,6 @@ class SearchAdapter(private val context:Context,private val fragmentManager: Fra
             }
             itemView.setOnClickListener {
                 val fragment = ProductDetailsFragment()
-                // Pass data to the fragment using arguments
                 val bundle = Bundle()
                 bundle.putString("id", productResponse._id.toString())
                 bundle.putString("brandName", productResponse.brandName)
@@ -50,13 +49,9 @@ class SearchAdapter(private val context:Context,private val fragmentManager: Fra
 
                 fragment.arguments = bundle
 
-                // Begin the transaction
                 val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-                // Replace the existing fragment with the new one
                 transaction.replace(R.id.flSearch, fragment)
-                // Add the transaction to the back stack (optional)
                 transaction.addToBackStack(null)
-                // Commit the transaction
                 transaction.commit()
             }
         }
@@ -95,14 +90,7 @@ class SearchAdapter(private val context:Context,private val fragmentManager: Fra
         val product = differ.currentList[position]
         holder.bind(product)
     }
-    //    fun setData(newList: List<ProductResponse>) {
-////        val diffUtilCallback = ProductResponseDiffCallback(datalist, newList)
-////        val diffResult = androidx.recyclerview.widget.DiffUtil.calculateDiff(diffUtilCallback)
-//
-//        datalist = newList
-//        notifyItemRangeChanged(0, datalist.size)
-////        diffResult.dispatchUpdatesTo(this)
-//    }
+
     fun setData(newList: List<ProductResponse>) {
         differ.submitList(newList)
     }

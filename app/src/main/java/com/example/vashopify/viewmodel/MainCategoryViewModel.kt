@@ -45,100 +45,122 @@ class MainCategoryViewModel @Inject constructor(
     val showLoading: StateFlow<Boolean> get() = _showLoading.asStateFlow()
     private val resultUpdate1 = Channel<AuthResult<Unit>>()
     val updateResult1 = resultUpdate1.receiveAsFlow()
+    init {
+        fetchCategory()
+        fetchBeautyProduct()
+        fetchPersonalCareProduct()
+        fetchWinterWearProduct()
+    }
+
     fun fetchBeautyProduct() {
 //        _showLoading.value = true
-        viewModelScope.launch {
-            _beautyState.value = ProductEvent.Loading
+        if (_beautyState.value !is ProductEvent.Success) {
+            viewModelScope.launch {
+                _beautyState.value = ProductEvent.Loading
 
-            when (val productResponse = productRepository.getProductsByCategory(catName1, page = 1, pageSize = 10)) {
-                is Resource.Error -> {
-                    Log.e("error", "Resource Error")
-                    _beautyState.value = ProductEvent.Failure
-                }
+                when (val productResponse =
+                    productRepository.getProductsByCategory(catName1, page = 1, pageSize = 10)) {
+                    is Resource.Error -> {
+                        Log.e("error", "Resource Error")
+                        _beautyState.value = ProductEvent.Failure
+                    }
 
-                is Resource.Success -> {
-                    val list = productResponse.data!!
-                    Log.d("error", "Resource Success")
+                    is Resource.Success -> {
+                        val list = productResponse.data!!
+                        Log.d("error", "Resource Success")
 //                    Log.d("error",list.toString())
 
-                    _beautyState.value = ProductEvent.Success(list)
+                        _beautyState.value = ProductEvent.Success(list)
 
+                    }
+
+                    else -> Unit
                 }
-
-                else -> Unit
             }
         }
     }
 
     fun fetchPersonalCareProduct() {
 //        _showLoading.value = true
-        viewModelScope.launch {
-            _personalState.value = ProductEvent.Loading
+        if (_personalState.value !is ProductEvent.Success) {
 
-            when (val productResponse = productRepository.getProductsByCategory(catName2,page=1, pageSize = 10)) {
-                is Resource.Error -> {
-                    Log.e("error", "Resource Error")
-                    _personalState.value = ProductEvent.Failure
-                }
+            viewModelScope.launch {
+                _personalState.value = ProductEvent.Loading
 
-                is Resource.Success -> {
-                    val list = productResponse.data!!
-                    Log.d("error", "Resource Success")
+                when (val productResponse =
+                    productRepository.getProductsByCategory(catName2, page = 1, pageSize = 10)) {
+                    is Resource.Error -> {
+                        Log.e("error", "Resource Error")
+                        _personalState.value = ProductEvent.Failure
+                    }
+
+                    is Resource.Success -> {
+                        val list = productResponse.data!!
+                        Log.d("error", "Resource Success")
 //                    Log.d("error",list.toString())
 
-                    _personalState.value = ProductEvent.Success(list)
+                        _personalState.value = ProductEvent.Success(list)
 
+                    }
+
+                    else -> Unit
                 }
-                else ->Unit
             }
         }
     }
 
     fun fetchWinterWearProduct() {
 //        _showLoading.value = true
-        viewModelScope.launch {
-            _winterState.value = ProductEvent.Loading
+        if (_winterState.value !is ProductEvent.Success) {
 
-            when (val productResponse = productRepository.getProductsByCategory(catName3, page = 1, pageSize = 10)) {
-                is Resource.Error -> {
-                    Log.e("error", "Resource Error")
-                    _winterState.value = ProductEvent.Failure
-                }
+            viewModelScope.launch {
+                _winterState.value = ProductEvent.Loading
 
-                is Resource.Success -> {
-                    val list = productResponse.data!!
-                    Log.d("error", "Resource Success")
+                when (val productResponse =
+                    productRepository.getProductsByCategory(catName3, page = 1, pageSize = 10)) {
+                    is Resource.Error -> {
+                        Log.e("error", "Resource Error")
+                        _winterState.value = ProductEvent.Failure
+                    }
+
+                    is Resource.Success -> {
+                        val list = productResponse.data!!
+                        Log.d("error", "Resource Success")
 //                    Log.d("error",list.toString())
 
-                    _winterState.value = ProductEvent.Success(list)
+                        _winterState.value = ProductEvent.Success(list)
 
+                    }
+
+                    else -> Unit
                 }
-
-                else -> Unit
             }
         }
     }
     fun fetchCategory() {
 //        _showLoading.value = true
-        viewModelScope.launch {
-            _catState.value = CategoryEvent.Loading
+        if (_catState.value !is CategoryEvent.Success) {
 
-            when (val catResponse = catRepo.getAllCategories()) {
-                is Resource.Error -> {
-                    Log.e("error", "Resource Error")
-                    _catState.value = CategoryEvent.Failure()
-                }
+            viewModelScope.launch {
+                _catState.value = CategoryEvent.Loading
 
-                is Resource.Success -> {
-                    val list = catResponse.data!!
-                    Log.d("error", "Resource Success")
+                when (val catResponse = catRepo.getAllCategories()) {
+                    is Resource.Error -> {
+                        Log.e("error", "Resource Error")
+                        _catState.value = CategoryEvent.Failure()
+                    }
+
+                    is Resource.Success -> {
+                        val list = catResponse.data!!
+                        Log.d("error", "Resource Success")
 //                    Log.d("error",list.toString())
 
-                    _catState.value = CategoryEvent.Success(list)
+                        _catState.value = CategoryEvent.Success(list)
 
+                    }
+
+                    else -> Unit
                 }
-
-                else -> Unit
             }
         }
     }

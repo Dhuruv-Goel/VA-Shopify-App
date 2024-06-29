@@ -38,7 +38,6 @@ class MainBeautyProductsAdapter(private val context: Context, private val fragme
 
             itemView.setOnClickListener {
                 val fragment = ProductDetailsFragment()
-                // Pass data to the fragment using arguments
                 val bundle = Bundle()
 
                 bundle.putString("id", productResponse._id.toString())
@@ -53,13 +52,9 @@ class MainBeautyProductsAdapter(private val context: Context, private val fragme
 
                 fragment.arguments = bundle
 
-                // Begin the transaction
                 val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-                // Replace the existing fragment with the new one
                 transaction.replace(R.id.flShopping, fragment)
-                // Add the transaction to the back stack (optional)
                 transaction.addToBackStack(null)
-                // Commit the transaction
                 transaction.commit()
             }
         }
@@ -102,14 +97,7 @@ class MainBeautyProductsAdapter(private val context: Context, private val fragme
         holder.bind(product)
     }
 
-    //    fun setData(newList: List<ProductResponse>) {
-////        val diffUtilCallback = ProductResponseDiffCallback(datalist, newList)
-////        val diffResult = androidx.recyclerview.widget.DiffUtil.calculateDiff(diffUtilCallback)
-//
-//        datalist = newList
-//        notifyItemRangeChanged(0, datalist.size)
-////        diffResult.dispatchUpdatesTo(this)
-//    }
+
     fun setData(newList: List<ProductResponse>) {
         differ.submitList(newList)
     }

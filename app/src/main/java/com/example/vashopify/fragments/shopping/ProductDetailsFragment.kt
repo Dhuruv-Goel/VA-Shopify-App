@@ -55,7 +55,6 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         }
         val arguments = arguments
         if (arguments != null) {
-            // Retrieve the value using the key specified during bundle creation
             val imagePrd = arguments.getString("images", "")
 
             binding.tvbrandName.text = arguments.getString("brandName", "")
@@ -111,10 +110,8 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
 private fun onBackButtonPressed() {
     val fragmentManager = requireActivity().supportFragmentManager
 
-    // Remove the current fragment
     fragmentManager.beginTransaction().remove(this).commit()
             (activity as? ShoppingActivity)?.forCounterChanged()
-// Remove the fragment from the back stack
 }
     private fun observeResult() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -175,36 +172,6 @@ private fun onBackButtonPressed() {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
-//    override fun onResume() {
-//        super.onResume()
-//        (activity as? ShoppingActivity)?.onFragmentResumed()
-//    }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        showToast("destroy")
-//        (activity as? ShoppingActivity)?.forCounterChanged()
-//    }
-//    override fun onPause() {
-//        super.onPause()
-//        (activity as? ShoppingActivity)?.onFragmentPaused()
-//    }
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        showToast("destroy")
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        showToast("pause")
-//        if(isAdded == "true") {
-//            isAdded = "true"
-//        }
-//    }
-//
-//    override fun onStart() {
-//        super.onStart()
-//        if
-//    }
 
 }

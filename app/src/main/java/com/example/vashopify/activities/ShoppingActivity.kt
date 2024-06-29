@@ -1,5 +1,6 @@
 package com.example.vashopify.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
@@ -35,16 +36,12 @@ class ShoppingActivity : AppCompatActivity() {
     private val isInternetAvailableLiveData = MutableLiveData<Boolean>()
     private lateinit var sharedPreferences: SharedPreferences
 
-    //    private val cloudname=  BuildConfig.
-    //    val apiKey = CloudinaryConfig.apiKey
-//    val apiSecret = CloudinaryConfig.apiSecret
-    //    private var isFragmentVisible =false
+
     private val viewModel: CartViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-//        initConfig()
-//        Log.d("media",cloudname)
+
         sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE)
         val navController = findNavController(R.id.shoppingHostFragment)
         binding.bottomNavigation.setupWithNavController(navController)
@@ -52,27 +49,14 @@ class ShoppingActivity : AppCompatActivity() {
         observeNetworkChanges()
         checkInternetStatus()
         observeInternet()
-//   initConfig()
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.getCart()
-//        Toast.makeText(this, "Resume", Toast.LENGTH_SHORT).show()
     }
 
-    //    override fun onStart() {
-//        super.onStart()
-//        Toast.makeText(this, "Start", Toast.LENGTH_SHORT).show()
-//        fetchCount()
-////    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        fetchCount()
-//        viewModel.getCart()
-//        Toast.makeText(this, "Pause", Toast.LENGTH_SHORT).show()
-//    }
+
     private fun fetchCount() {
         lifecycleScope.launch {
             viewModel.cartItems.collect { list ->
@@ -99,6 +83,7 @@ class ShoppingActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     private fun observeNetworkChanges() {
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -125,6 +110,7 @@ class ShoppingActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     private fun checkInternetStatus() {
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -143,7 +129,6 @@ class ShoppingActivity : AppCompatActivity() {
             isInternetAvailableLiveData.postValue(isConnected)
         }
 
-        // Observe the LiveData for changes
 
     }
 
@@ -162,11 +147,7 @@ class ShoppingActivity : AppCompatActivity() {
             }
         }
     }
-//
-//    fun onFragmentResumed() {
-////        isFragmentVisible = true
-//        viewModel.getCart()
-//    }
+
 
     fun forCounterChanged() {
         viewModel.getCart()
@@ -177,11 +158,7 @@ class ShoppingActivity : AppCompatActivity() {
         checkInternetStatus()
         observeInternet()
     }
-//    private fun initConfig(){
-//        val config: MutableMap<String, String> = HashMap()
-//        config["cloud_name"] = cloudname
-//        MediaManager.init(this, config)
-//    }
+
 
 
 }
